@@ -10,29 +10,38 @@ public class Program {
 
 	public static void main(String[] args) {
 
-//		diningPhilosophers();
-		sleepingBarber();
+		diningPhilosophers();
+//		sleepingBarber();
 	}
-	
+
 	public static void diningPhilosophers() {
-		
+
 		String[] philosophers = { "Socrates", "Nietzsche", "Kant", "Rousseau", "Marx" };
-		Chopstick[] chopsticks = { new Chopstick(), new Chopstick(), new Chopstick(), new Chopstick(), new Chopstick() };
+		Chopstick[] chopsticks = { new Chopstick(), new Chopstick(), new Chopstick(), new Chopstick(),
+				new Chopstick() };
 
 		for (int i = 0; i < philosophers.length; i++) {
+			Chopstick left = chopsticks[i];
+			Chopstick right = chopsticks[(i + 1) % 5];
+			Thread diningPhilosopher;
 
-			Thread diningPhilosopher = new Thread(new Philosopher(philosophers[i], chopsticks[i], chopsticks[(i + 1) % 5]));
+			if (i == philosophers.length - 1) {
+				diningPhilosopher = new Thread(new Philosopher(philosophers[i], right, left));
+			} else {
+				diningPhilosopher = new Thread(new Philosopher(philosophers[i], left, right));
+			}
+
 			diningPhilosopher.start();
 		}
 	}
-	
+
 	public static void sleepingBarber() {
-		
+
 		Shop shop = new Shop();
-				
+
 		Thread t = new Thread(new Barber(shop));
 		Thread c = new Thread(new Customer(shop));
-		
+
 		t.start();
 		c.start();
 	}
