@@ -29,7 +29,7 @@ public class Customer implements Runnable { // this is the producer of customers
 	public Customer(Shop shop) {
 
 		this.shop = shop;
-		
+
 	}
 
 	@Override
@@ -38,7 +38,9 @@ public class Customer implements Runnable { // this is the producer of customers
 		// producing customers
 		while (true) {
 			String nextCustomer = getRandomCustomer();
-			shop.enterCustomer(nextCustomer);
+			if (!shop.enterCustomer(nextCustomer)) {
+				System.out.println(nextCustomer + " left because there was no available seat");
+			}
 		}
 	}
 
@@ -46,7 +48,7 @@ public class Customer implements Runnable { // this is the producer of customers
 		try {
 
 			Thread.sleep(ThreadLocalRandom.current().nextInt(0, 3000));
-			int nextCustomerIndex = ThreadLocalRandom.current().nextInt(0, customerNames.length-1);
+			int nextCustomerIndex = ThreadLocalRandom.current().nextInt(0, customerNames.length - 1);
 			String nextCustomer = customerNames[nextCustomerIndex];
 			return nextCustomer;
 

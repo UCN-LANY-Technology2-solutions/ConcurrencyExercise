@@ -49,7 +49,7 @@ public class Barber implements Runnable { // this is the consumer
 				// determines a pseudorandom number between 0 to 1000 that represents the
 				// working time in milliseconds
 
-				int workTime = ThreadLocalRandom.current().nextInt(0, 1000);
+				int workTime = ThreadLocalRandom.current().nextInt(0, 3000);
 				System.out.println("Barber cuts "+ customer +" for " + workTime + "ms");
 
 				Thread.sleep(workTime);
