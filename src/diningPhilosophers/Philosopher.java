@@ -23,9 +23,7 @@ public class Philosopher implements Runnable {
 			think();
 
 			leftChopstick.grab();
-			//System.out.println(name +" grabbed left chopstick...");
 			rightChopstick.grab();
-			//System.out.println(name +" grabbed right chopstick...");
 			
 			eat();
 
